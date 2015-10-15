@@ -10,6 +10,26 @@ class SurviveGame:
         self._initGame()
         self._startGame()
 
+    def _produce(self):
+        for village in self.villages:
+            village.produce()
+    
+    def _heal(self):
+        for village in self.villages:
+            village.heal()
+
+    def _attack(self):
+        for village in self.villages:
+            village.attack()
+
+    def _steal(self):
+        for village in self.villages:
+            village.steal()
+
+    def _feed(self):
+        for village in self.villages:
+            village.feed()
+
     def _initGame(self):
         try:
             playerInput = raw_input("How many human players? ")
@@ -35,8 +55,12 @@ class SurviveGame:
             # Add initial population
 
     def _startGame(self):
-        for village in self.villages:
-            print "The village of {0} has population {1}, food {2}, gold {3}".format(village.name, len(village.population), village.food, village.gold)
+        while len(self.villages) != 0:
+            for village in self.villages:
+                print village
+                if village.isEmpty():
+                    print "The village {0} has died out".format(village.name)
+                    self.villages.remove(village)
 
 if __name__ == '__main__':
     game = SurviveGame()
