@@ -1,32 +1,35 @@
-import village
+import village, person
 
 class SurviveGame:
-    def __init__(self):
+    def __init__(self, startingFood, startingGold, startingPopulation):
         self.villages = []
         self.maxPlayers = 2
+        self.startingFood = startingFood
+        self.startingGold = startingGold
+        self.startingPopulation = startingPopulation
         self._play()
 
     def _play(self):
         self._initGame()
         self._startGame()
 
-    def _produce(self):
+    def _produceStep(self):
         for village in self.villages:
             village.produce()
     
-    def _heal(self):
+    def _healStep(self):
         for village in self.villages:
             village.heal()
 
-    def _attack(self):
+    def _attackStep(self):
         for village in self.villages:
             village.attack()
 
-    def _steal(self):
+    def _stealStep(self):
         for village in self.villages:
             village.steal()
 
-    def _feed(self):
+    def _feedStep(self):
         for village in self.villages:
             village.feed()
 
@@ -50,9 +53,11 @@ class SurviveGame:
     
     def _initVillages(self):
         for village in self.villages:
-            village.food = 5
-            village.gold = 0
+            village.food = self.startingFood
+            village.gold = self.startingGold
             # Add initial population
+            for i in range(0, self.startingPopulation):
+                village.population.append(person.Peasant(village))
 
     def _startGame(self):
         while len(self.villages) != 0:
@@ -61,6 +66,11 @@ class SurviveGame:
                 if village.isEmpty():
                     print "The village {0} has died out".format(village.name)
                     self.villages.remove(village)
+            self._produceStep()
+            self._healStep()
+            self._attackStep()
+            self._stealStep()
+            self._feedStep()
 
 if __name__ == '__main__':
-    game = SurviveGame()
+    game = SurviveGame(5, 0, 5)

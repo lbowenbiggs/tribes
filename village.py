@@ -1,3 +1,5 @@
+from random import randint
+
 class Village:
     def __init__(self, name):
         self.name = name
@@ -11,7 +13,13 @@ class Village:
         return False
 
     def produce(self):
-        pass
+        for person in self.population:
+            if person.type == "Farmer":
+                roll = randint(0, 1)
+                if roll == 0:
+                    person._onFailure()
+                else:
+                    person._onSuccess()
 
     def heal(self):
         pass
