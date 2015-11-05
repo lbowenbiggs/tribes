@@ -1,7 +1,15 @@
 class Person:
+    wounds = 2
+
     def __init__(self):
         self.type = "Peasant"
         self.village = None
+        self.wounds = 2
+
+    def wound(self, amount=1):
+        self.wounds -= amount
+        if self.wounds < 1:
+            return "Death"
 
 class Farmer(Person):
     def __init__(self, village):

@@ -71,6 +71,7 @@ class SurviveGame:
             self._attackStep()
             self._stealStep()
             self._feedStep()
+            raw_input("Waiting....")
 
 if __name__ == '__main__':
     game = SurviveGame(5, 0, 5)
