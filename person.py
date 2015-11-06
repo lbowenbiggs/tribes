@@ -20,6 +20,7 @@ class Baby(Person):
     def __init__(self, village):
         self.type = "Baby"
         self.village = village
+        self.wounds = 1
 
 class Farmer(Person):
     def __init__(self, village):

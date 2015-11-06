@@ -42,5 +42,15 @@ class Village:
             if self.population[0].wound() == "Death":
                 self.population.pop(0)
 
+    def _printVillagers(self):
+        string = "ID\tType\tWounds\n"
+        count = 1
+        for villager in self.population:
+            string += "{0}\t{1}\t{2}\n".format(count, villager.type, villager.wounds)
+            count += 1
+        return string
+
     def __str__(self):
-        return "The Village of {0}, Population: {1}\nFood: {2}\tGold: {3}\n".format(self.name, len(self.population), self.food, self.gold)
+        string = "The Village of {0}, Population: {1}\nFood: {2}\tGold: {3}\n".format(self.name, len(self.population), self.food, self.gold)
+        string += self._printVillagers()
+        return string

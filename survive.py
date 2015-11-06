@@ -67,12 +67,12 @@ class SurviveGame:
                 if village.isEmpty():
                     print "The village {0} has died out".format(village.name)
                     self.villages.remove(village)
+            raw_input("Waiting....")
             self._produceStep()
             self._healStep()
             self._attackStep()
             self._stealStep()
             self._feedStep()
-            raw_input("Waiting....")
 
 if __name__ == '__main__':
     game = SurviveGame(5, 0, 5)
