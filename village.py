@@ -1,4 +1,5 @@
 from random import randint
+import person
 
 class Village:
     def __init__(self, name):
@@ -30,6 +31,15 @@ class Village:
     def steal(self):
         pass
 
+    def age(self):
+        # 1) Babies grow up
+        for villager in self.population:
+            if villager.type == "Baby":
+                self.population.remove(villager)
+                self.population.append(person.Peasant(self))
+        # 2) Train villagers
+        # 3) Untrain villagers
+
     def feed(self):
         if self.food < len(self.population):
             print "Wounding {0} villagers".format(len(self.population) - self.food)
@@ -39,8 +49,21 @@ class Village:
 
     def _wound(self, numPeople=1):
         for i in range(numPeople):
-            if self.population[0].wound() == "Death":
-                self.population.pop(0)
+            starving = self._chooseVillager("Who do you want to wound? ")
+            if self.population[starving].wound() == "Death":
+                self.population.pop(starving)
+
+    def _chooseVillager(self, prompt):
+        print self._printVillagers()
+        try:
+            playerInput = raw_input(prompt)
+            chosenOne = int(playerInput)
+            if chosenOne > len(self.population) or chosenOne < 0:
+                raise ValueError("That's not a number")
+        except ValueError as err:
+            # print str(err)
+            return self._chooseVillager(prompt)
+        return chosenOne - 1
 
     def _printVillagers(self):
         string = "ID\tType\tWounds\n"

@@ -33,6 +33,10 @@ class SurviveGame:
         for village in self.villages:
             village.feed()
 
+    def _ageStep(self):
+        for village in self.villages:
+            village.age()
+
     def _initGame(self):
         try:
             playerInput = raw_input("How many human players? ")
@@ -73,6 +77,7 @@ class SurviveGame:
             self._attackStep()
             self._stealStep()
             self._feedStep()
+            self._ageStep()
 
 if __name__ == '__main__':
     game = SurviveGame(5, 0, 5)
