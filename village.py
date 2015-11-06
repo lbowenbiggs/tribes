@@ -14,12 +14,12 @@ class Village:
 
     def produce(self):
         for person in self.population:
-            if person.type == "Farmer":
+            if person.type == "Farmer" or person.type == "Civilian":
                 roll = randint(0, 1)
                 if roll == 0:
-                    person._onFailure()
+                    person.onFailure()
                 else:
-                    person._onSuccess()
+                    person.onSuccess()
 
     def heal(self):
         pass

@@ -16,7 +16,7 @@ class SurviveGame:
     def _produceStep(self):
         for village in self.villages:
             village.produce()
-    
+
     def _healStep(self):
         for village in self.villages:
             village.heal()
@@ -42,7 +42,7 @@ class SurviveGame:
         except ValueError as err:
             print str(err)
             return self._initGame()
-        self._addHumans(numHumanPlayers) 
+        self._addHumans(numHumanPlayers)
         self._initVillages()
 
     def _addHumans(self, numHumans):
@@ -50,14 +50,15 @@ class SurviveGame:
             villageName = raw_input("Enter a name for village {0}: ".format(index))
             newVillage = village.Village(villageName)
             self.villages.append(newVillage)
-    
+
     def _initVillages(self):
         for village in self.villages:
             village.food = self.startingFood
             village.gold = self.startingGold
-            # Add initial population
-            for i in range(0, self.startingPopulation):
-                village.population.append(person.Peasant(village))
+            # Add initial population (This is a test batch)
+            village.population.append(person.Peasant(village))
+            village.population.append(person.Civilian(village))
+            village.population.append(person.Farmer(village))
 
     def _startGame(self):
         while len(self.villages) != 0:

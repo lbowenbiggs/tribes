@@ -11,18 +11,34 @@ class Person:
         if self.wounds < 1:
             return "Death"
 
+class Peasant(Person):
+    def __init__(self, village):
+        self.type = "Peasant"
+        self.village = village
+
+class Baby(Person):
+    def __init__(self, village):
+        self.type = "Baby"
+        self.village = village
+
 class Farmer(Person):
     def __init__(self, village):
         self.type = "Farmer"
         self.village = village
 
-    def _onSuccess(self):
+    def onSuccess(self):
         self.village.food += 3
 
-    def _onFailure(self):
+    def onFailure(self):
         self.village.food += 1
 
-class Peasant(Person):
+class Civilian(Person):
     def __init__(self, village):
-        self.type = "Peasant"
+        self.type = "Civilian"
         self.village = village
+
+    def onSuccess(self):
+        self.village.gold += 2
+
+    def onFailure(self):
+        self.village.population.append(Baby(self.village))
