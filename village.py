@@ -23,7 +23,13 @@ class Village:
                     person.onSuccess()
 
     def heal(self):
-        pass
+        for villager in self.population:
+            if villager.type == "Medic":
+                roll = randint(0, 1)
+                if roll == 0:
+                    villager.onFailure()
+                else:
+                    villager.onSuccess()
 
     def attack(self):
         pass
@@ -46,6 +52,11 @@ class Village:
             self._wound(len(self.population) - self.food)
         else:
             self.food -= len(self.population)
+
+    def healWounds(self, amount=2):
+        for i in range(amount):
+            healed = self._chooseVillager("Who do you want to heal? ")
+            self.population[healed].heal()
 
     def _wound(self, numPeople=1):
         for i in range(numPeople):

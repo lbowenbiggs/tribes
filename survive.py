@@ -63,6 +63,7 @@ class SurviveGame:
             village.population.append(person.Peasant(village))
             village.population.append(person.Civilian(village))
             village.population.append(person.Farmer(village))
+            village.population.append(person.Medic(village))
 
     def _startGame(self):
         while len(self.villages) != 0:

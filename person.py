@@ -11,6 +11,11 @@ class Person:
         if self.wounds < 1:
             return "Death"
 
+    def heal(self, amount=1):
+        # For now, there is no Maximum Health
+        self.wounds += 1
+
+''' Basic types: No actions '''
 class Peasant(Person):
     def __init__(self, village):
         self.type = "Peasant"
@@ -22,6 +27,7 @@ class Baby(Person):
         self.village = village
         self.wounds = 1
 
+''' Producers '''
 class Farmer(Person):
     def __init__(self, village):
         self.type = "Farmer"
@@ -43,3 +49,15 @@ class Civilian(Person):
 
     def onFailure(self):
         self.village.population.append(Baby(self.village))
+
+''' Special Types '''
+class Medic(Person):
+    def __init__(self, village):
+        self.type = "Medic"
+        self.village = village
+
+    def onSuccess(self):
+        self.village.healWounds()
+
+    def onFailure(self):
+        pass
