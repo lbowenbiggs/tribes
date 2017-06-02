@@ -66,11 +66,14 @@ class SurviveGame:
             village.population.append(person.Medic(village))
 
     def _startGame(self):
+        roundCounter = 0
         while len(self.villages) != 0:
+            roundCounter = roundCounter + 1
+            print "***** ROUND {0} *****".format(roundCounter)
             for village in self.villages:
                 print village
                 if village.isEmpty():
-                    print "The village {0} has died out".format(village.name)
+                    print "The village {0} has died out after {1} rounds".format(village.name, roundCounter)
                     self.villages.remove(village)
             raw_input("Waiting....")
             self._produceStep()
