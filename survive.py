@@ -60,10 +60,11 @@ class SurviveGame:
             village.food = self.startingFood
             village.gold = self.startingGold
             # Add initial population (This is a test batch)
-            village.population.append(person.Peasant(village))
-            village.population.append(person.Civilian(village))
-            village.population.append(person.Farmer(village))
-            village.population.append(person.Medic(village))
+            for i in range(0, self.startingPopulation):
+                newVillager = None
+                while (newVillager == None):
+                    newVillager = village._chooseClass()
+                village.population.append(newVillager)
 
     def _startGame(self):
         roundCounter = 0
