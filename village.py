@@ -44,6 +44,16 @@ class Village:
                 self.population.remove(villager)
                 self.population.append(person.Peasant(self))
         # 2) Train villagers
+        for villager in self.population:
+            if villager.type == "Peasant" and self.gold > 1:
+                if (self._saysYes("Would you like to train this Peasant?")):
+                    newVillager = self._chooseClass()
+                    if (newVillager != None):
+                        self.population.remove(villager)
+                        self.population.append(newVillager)
+                        self.gold = self.gold - 2
+                    else:
+                        print "Peasant not trained"
         # 3) Untrain villagers
 
     def feed(self):
@@ -63,6 +73,20 @@ class Village:
             starving = self._chooseVillager("Who do you want to wound? ")
             if self.population[starving].wound() == "Death":
                 self.population.pop(starving)
+
+    def _saysYes(self, prompt):
+        playerInput = raw_input(prompt)
+        if "Y" in playerInput.upper():
+            return True
+        return False
+
+    def _chooseClass(self):
+        if (self._saysYes("Medic?")):
+            return person.Medic(self)
+        if (self._saysYes("Farmer?")):
+            return person.Farmer(self)
+        if (self._saysYes("Civilian?")):
+            return person.Civilian(self)
 
     def _chooseVillager(self, prompt):
         print self._printVillagers()
